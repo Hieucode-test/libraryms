@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}
+Trang chủ - LibraryMS
+{% endblock %}
+
+{% block content %}
+
+<h1>LibraryMS</h1>
+
+<h2>Thống kê thư viện</h2>
+
+<p>
+    Tổng số đầu sách:
+    <strong>{{ total_books }}</strong>
+</p>
+
+<p>
+    Số sách sẵn sàng cho mượn:
+    <strong>{{ available_books }}</strong>
+</p>
+
+<p>
+    <a href="{{ url_for('books') }}">
+        Xem danh sách sách
+    </a>
+</p>
+
+{% endblock %}
