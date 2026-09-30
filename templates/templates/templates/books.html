@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+
+{% block title %}
+Danh sách sách
+{% endblock %}
+
+{% block content %}
+
+<h1>Danh sách sách</h1>
+
+<h3>Lọc theo thể loại</h3>
+
+<form method="get" action="{{ url_for('books') }}">
+
+    <select name="category">
+
+        <option value="">
+            Tất cả thể loại
+        </option>
+
+        {% for category in categories %}
+
+        <option
+            value="{{ category|e }}"
+            {% if category == selected_category %}
+                selected
+            {% endif %}
+        >
+            {{ category|e }}
+        </option>
+
+        {% endfor %}
+
+    </select>
+
+    <button type="submit">
+        Lọc
+    </button>
+
+    <a href="{{ url_for('books') }}">
+        Xóa bộ lọc
+    </a>
+
+</form>
+
+<br>
+
+<table>
+
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Tên sách</th>
+            <th>Tác giả</th>
+            <th>Năm</th>
+            <th>Thể loại</th>
+            <th>Tình trạng</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        {% for book in books %}
+
+        <tr>
+
+            <td>
+                {{ book.id }}
+            </td>
+
+            <td>
+                <a href="{{ url_for('book_detail', book_id=book.id) }}">
+                    {{ book.title|e }}
+                </a>
+            </td>
+
+            <td>
+                {{ book.author|e }}
+            </td>
+
+            <td>
+                {{ book.year }}
+            </td>
+
+            <td>
+                {{ book.category|e }}
+            </td>
+
+            <td>
+
+                {% if book.available %}
+
+                    <span class="available">
+                        Có sẵn
+                    </span>
+
+                {% else %}
+
+                    <span class="unavailable">
+                        Đã mượn
+                    </span>
+
+                {% endif %}
+
+            </td>
+
+        </tr>
+
+        {% else %}
+
+        <tr>
+            <td colspan="6">
+                Không tìm thấy sách phù hợp.
+            </td>
+        </tr>
+
+        {% endfor %}
+
+    </tbody>
+
+</table>
+
+{% endblock %}
