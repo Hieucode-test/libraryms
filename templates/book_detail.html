@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}
+Chi tiết sách
+{% endblock %}
+
+{% block content %}
+
+<h1>Chi tiết sách</h1>
+
+<p>
+    <strong>ID:</strong>
+    {{ book.id }}
+</p>
+
+<p>
+    <strong>Tên sách:</strong>
+    {{ book.title|e }}
+</p>
+
+<p>
+    <strong>Tác giả:</strong>
+    {{ book.author|e }}
+</p>
+
+<p>
+    <strong>Năm xuất bản:</strong>
+    {{ book.year }}
+</p>
+
+<p>
+    <strong>Thể loại:</strong>
+    {{ book.category|e }}
+</p>
+
+<p>
+    <strong>Tình trạng:</strong>
+
+    {% if book.available %}
+        <span class="available">
+            Có sẵn
+        </span>
+    {% else %}
+        <span class="unavailable">
+            Đã mượn
+        </span>
+    {% endif %}
+
+</p>
+
+<p>
+    <a href="{{ url_for('books') }}">
+        ← Quay lại danh sách
+    </a>
+</p>
+
+{% endblock %}
